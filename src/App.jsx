@@ -1,24 +1,26 @@
 import { useEffect, useState } from 'react';
 import { fetchUsers } from './components/service/api';
-import Card from '@components/Card/Card';
-import Input from './components/Input/Input';
-import Select from './components/Select/Select';
+import Filters from './components/Filters/Filters';
+import CardUsers from './components/Card/CardUsers';
 
 function App() {
   const [users, setUsers] = useState([]);
   const [searchUser, setSearchUser] = useState('');
   const [select, setSelect] = useState('az');
 
-  const [isLoading, setIsLoading] = useState(false)
-  console.log(isLoading)
+  const [isLoading, setIsLoading] = useState(true)
+  const [isError, setIsError] = useState(false)
+
+
   useEffect(() => {
     const fetchUsersData = async () => {
       try {
         const result = await fetchUsers();
-        setIsLoading(true)
+        setIsLoading(true);
         setUsers(result);
       } catch (error) {
-       
+        setIsLoading(false);
+        setIsError(true)
         console.log(error);
       }
     };
@@ -46,22 +48,22 @@ function App() {
   const filterUsers = users
     .filter(user => sortByUser(user))
     .sort((currentUser, nextUser) => compareUsers(currentUser, nextUser));
+  
+  if (isError) {
+    return (
+      <>
+        <h1>ERROR PANIK</h1>
+      </>
+    )
+  }
 
   if (isLoading) {
     return (
       <>
-        <div className="filters">
-          <Input value={searchUser} onChange={e => setSearchUser(e.target.value)} />
-          <Select onChange={e => setSelect(e.target.value)} />
-        </div>
-
-        <div className="users-list">
-          <ul className="user-card">
-            {filterUsers.map(user => (
-              <Card key={user.login.uuid} user={user} />
-            ))}
-          </ul>
-        </div>
+        <Filters searchUser={searchUser}
+          onChangeSelect={e => setSelect(e.target.value)}
+          onChangeInput={e => setSearchUser(e.target.value)} />
+        <CardUsers filterUsers={filterUsers} />
       </>
     );
   }

@@ -1,4 +1,4 @@
-const Card = ({user}) => {
+const CardItem = ({user}) => {
 	return (
     <>
       <li >
@@ -18,4 +18,4 @@ const Card = ({user}) => {
   );
 };
 
-export default Card;
+export default CardItem;
