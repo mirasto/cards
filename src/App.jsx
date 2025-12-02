@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { fetchUsers } from './components/service/api';
-import Filters from './components/Filters/Filters';
-import CardUsers from './components/Card/CardUsers';
+import { fetchUsers } from '@components/service/api';
+import Filters from '@components/Filters/Filters';
+import CardUsers from '@components/Card/CardUsers';
 
 function App() {
   const [users, setUsers] = useState([]);

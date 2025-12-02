@@ -1,5 +1,5 @@
-import Input from "../Input/Input";
-import Select from "../Select/Select";
+import Input from '@components/Input/Input';
+import Select from '@components/Select/Select';
 
 const Filters = ({ value, onChangeSelect, onChangeInput }) => {
   return (
