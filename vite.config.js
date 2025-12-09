@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 //import tailwindcss from '@tailwindcss/vite';
 import path from 'path'; 
 
-const BASE_PATH = '/repository-name/';
+const BASE_PATH = '/cards/';
 
 export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? BASE_PATH : '/',
