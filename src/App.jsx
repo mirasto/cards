@@ -16,12 +16,12 @@ function App() {
     const fetchUsersData = async () => {
       try {
         const result = await fetchUsers();
-        setIsLoading(false);
         setUsers(result);
       } catch (error) {
         setIsError(true);
-        setIsLoading(false);
         console.log('error', error.message);
+      } finally {
+        setIsLoading(false)
       }
     };
     fetchUsersData();
